@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Прятки с Хаги Ваги</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
+</head>
+<body>
+    <div class="app">
+        <!-- Меню -->
+        <div class="menu" id="menu">
+            <div class="menu-content">
+                <img src="images/logo.png" alt="Logo" class="logo" onerror="this.style.display='none'">
+                <h1>🌿 ПРЯТКИ</h1>
+                <h2>с Хаги Ваги</h2>
+                <div class="menu-buttons">
+                    <button class="menu-btn play-btn" id="playBtn">🎮 ИГРАТЬ</button>
+                    <button class="menu-btn rules-btn" id="rulesBtn">📖 ПРАВИЛА</button>
+                </div>
+                <div class="stats" id="stats">
+                    <span>👥 Онлайн: <span id="onlineCount">0</span></span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Правила -->
+        <div class="rules-modal" id="rulesModal" style="display: none;">
+            <div class="rules-content">
+                <h2>📖 Правила игры</h2>
+                <ul>
+                    <li>🎮 <strong>Водящий</strong> ждёт 30 секунд, пока другие прячутся</li>
+                    <li>🌿 <strong>Прячущиеся</strong> кликают по кустам, чтобы спрятаться</li>
+                    <li>😈 <strong>Злой Хаги Ваги (99%)</strong> выгоняет из куста</li>
+                    <li>😇 <strong>Добрый Хаги Ваги (1%)</strong> — мгновенная победа всех!</li>
+                    <li>🔎 <strong>Водящий</strong> кликает по кустам, чтобы найти игроков</li>
+                    <li>🏆 Побеждает водящий, если найдёт всех, или прячущиеся, если выпал Добрый</li>
+                </ul>
+                <button class="close-rules">Закрыть</button>
+            </div>
+        </div>
+
+        <!-- Игровой экран -->
+        <div class="game-screen" id="gameScreen" style="display: none;">
+            <div class="game-container">
+                <div class="menu-panel">
+                    <h1>🌿 ПРЯТКИ | Хаги Ваги 99% 😈</h1>
+                    <div class="status" id="statusLabel">⚡ СОЕДИНЕНИЕ... <span id="timerSpan" class="timer"></span></div>
+                    <div class="input-group">
+                        <input type="text" id="nickInput" placeholder="Ваше имя" maxlength="12">
+                        <button id="setNameBtn">✅ Сменить имя</button>
+                        <button id="exitMenuBtn" class="exit-btn">🏠 Выход</button>
+                    </div>
+                    <div class="players-list" id="playersList">👥 Загрузка...</div>
+                    <div class="flex-row">
+                        <button id="startGameBtn" style="background:#4cae4c;">🎮 ИГРАТЬ (запуск)</button>
+                        <button id="resetGameBtn">🔄 Сброс</button>
+                    </div>
+                    <div class="bush-hint">
+                        🌿 Кликни по любому кусту на карте, чтобы спрятаться! (30 секунд)
+                    </div>
+                    <div class="server-log" id="logMessages"></div>
+                </div>
+                <div>
+                    <canvas id="gameCanvas" width="800" height="500"></canvas>
+                    <div class="flex-row">
+                        <button id="seekBtn">🔎 Искать (клик по кусту)</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
